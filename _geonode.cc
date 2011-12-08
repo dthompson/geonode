@@ -163,7 +163,11 @@ Handle<Value> Geometry::ToWKT(const Arguments& args)
     if (geom->geos_geom_ != NULL) {
         char *wkt = GEOSWKTWriter_write(wkt_writer, geom->geos_geom_);
         wktjs = String::New(wkt);
+#if GEOS_CAPI_VERSION_MAJOR >= 2 || (GEOS_CAPI_VERSION_MAJOR == 1 && GEOS_CAPI_VERSION_MINOR >= 6)
         GEOSFree(wkt);
+#else
+        free(wkt);
+#endif
     } else {
         wktjs = String::New("");
     }
@@ -231,7 +235,11 @@ Handle<Value> Geometry::Relate(const Arguments& args)
         if (pattern == NULL)
             return ThrowException(String::New("couldn't get relate pattern"));
         Local<Value> pattern_obj = String::New(pattern);
+#if GEOS_CAPI_VERSION_MAJOR >= 2 || (GEOS_CAPI_VERSION_MAJOR == 1 && GEOS_CAPI_VERSION_MINOR >= 6)
         GEOSFree(pattern);
+#else
+        free(pattern);
+#endif
         return scope.Close(pattern_obj);
     } else if (args.Length() == 2) {
         // Returns a boolean if the two geometries relate according to the pattern argument
@@ -268,7 +276,11 @@ Handle<Value> Geometry::GetType(Local<String> name, const AccessorInfo& info)
     if (type == NULL)
         return ThrowException(String::New("couldn't get geometry type"));
     Handle<Value> type_obj = String::New(type);
+#if GEOS_CAPI_VERSION_MAJOR >= 2 || (GEOS_CAPI_VERSION_MAJOR == 1 && GEOS_CAPI_VERSION_MINOR >= 6)
     GEOSFree(type);
+#else
+    free(type);
+#endif
     return scope.Close(type_obj);
 }
 
