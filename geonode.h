@@ -185,6 +185,7 @@ class Geometry : public ObjectWrap {
     static Handle<Value> GetCentroid(Local<String> name, const AccessorInfo& info);
     static Handle<Value> Relate(const Arguments& args);
     static Handle<Value> Simplify(const Arguments& args);
+    static Handle<Value> TopologyPreserveSimplify(const Arguments& args);
     // GEOS unary predicates
     static Handle<Value> IsEmpty(const Arguments& args);
     static Handle<Value> IsValid(const Arguments& args);
