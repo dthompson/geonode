@@ -436,7 +436,7 @@ TransformerException::TransformerException(char *description) {
     strncpy(this->description, description, 1024);
 }
 char *TransformerException::GetDescription() { return this->description; }
-
+/*
 Projection::Projection(const char* init)
 {
     this->pj = pj_init_plus(init);
@@ -573,14 +573,14 @@ void ProjectionPointTransformer::Transform(double *x, double *y, double *z) {
         throw TransformerException(pj_strerrno(err));
     }
 }
-
+*/
 extern "C" void
 init (Handle<Object> target)
 {
     HandleScope scope;
     initGEOS(notice_handler, error_handler);
     Geometry::Initialize(target);
-    Projection::Initialize(target);
+    //    Projection::Initialize(target);
 }
 
 // TODO: where to call finishGEOS(); ? Is it even necessary?

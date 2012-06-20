@@ -5,7 +5,7 @@
 #include <node.h>
 #include <node_object_wrap.h>
 #include "geos_c.h"
-#include "proj_api.h"
+/*#include "proj_api.h"*/
 
 /**
  * A convenience for defining repetitive wrappers of GEOS unary
@@ -222,7 +222,7 @@ class Geometry : public ObjectWrap {
     static GEOSGeometry *ApplyPointTransformationToSingleGeometry(PointTransformer *t, const GEOSGeometry *g);
     static GEOSCoordSequence *ApplyPointTransformationToCoordSequence(PointTransformer *t, const GEOSCoordSequence *seq);
 };
-
+/*
 class ProjectionPointTransformer : public PointTransformer {
  public:
      ProjectionPointTransformer(projPJ from, projPJ to);
@@ -256,3 +256,4 @@ class Projection : public ObjectWrap {
     static Handle<FunctionTemplate> MakeProjectionTemplate();
 };
 
+*/
